@@ -10,10 +10,10 @@ import pickle
 from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
 
-
+"""
 def export_collection_as_dataframe(collection_name, db_name):
     try:
-        mongo_client = MongoClient(os.getenv("mongodb+srv://dibya069:dibya069@cluster0.kzsge5t.mongodb.net/?retryWrites=true&w=majority"))
+        mongo_client = MongoClient(os.getenv("mongodb+srv://mohanty:jisoo7@cluster0.ivrmadz.mongodb.net/?retryWrites=true&w=majority"))
 
         collection = mongo_client[db_name][collection_name]
 
@@ -28,7 +28,7 @@ def export_collection_as_dataframe(collection_name, db_name):
 
     except Exception as e:
         raise CustomException(e, sys)
-    
+"""
 def save_obj(file_path, obj):
     try:
         dir_path = os.path.dirname(file_path)
@@ -36,6 +36,14 @@ def save_obj(file_path, obj):
 
         with open(file_path, "wb") as file_obj:
             pickle.dump(obj, file_obj)
+
+    except Exception as e:
+        raise CustomException(e, sys)
+    
+def load_object(file_path):
+    try:
+        with open(file_path, "rb") as file_obj:
+            return pickle.load(file_obj)
 
     except Exception as e:
         raise CustomException(e, sys)

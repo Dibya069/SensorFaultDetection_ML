@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 
 from src.exception import CustomException
 from src.logger import logging
-from src.util import export_collection_as_dataframe
+#from src.util import export_collection_as_dataframe
 
 
 @dataclass
@@ -26,10 +26,11 @@ class DataIngestion:
         logging.info("Entered initiate_data_ingestion method of DataIngestion class")
 
         try:
-            df: pd.DataFrame = export_collection_as_dataframe(
-                db_name="sensor", collection_name="Wafer_fault(1)"
+            """df: pd.DataFrame = export_collection_as_dataframe(
+                db_name="ML_project", collection_name="Sensore"
             )
-
+            """
+            df = pd.read_csv(os.path.join("notebook/data", "wafer.csv"))
             logging.info("Exported collection as dataframe")
 
             os.makedirs(
