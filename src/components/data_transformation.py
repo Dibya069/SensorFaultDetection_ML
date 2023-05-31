@@ -32,7 +32,8 @@ class DataTransformation:
 
             # define the steps for the preprocessor pipeline
             nan_replacement_step = ('nan_replacement', FunctionTransformer(replace_na_with_nan))
-            imputer_step = ('imputer', SimpleImputer(strategy='constant', fill_value=0))
+            
+            imputer_step = ('imputer', SimpleImputer(strategy='most_frequent', fill_value=0))
             scaler_step = ('scaler', RobustScaler())
 
             preprocessor = Pipeline(
@@ -53,12 +54,15 @@ class DataTransformation:
     def initiate_data_transformation(self, train_path, test_path):
         try:
             train_df = pd.read_csv(train_path)
-
             test_df = pd.read_csv(test_path)
+
+            logging.info("Read Train and Test Completed")
+            logging.info(f"The dataframe Head:  \n{train_df.head().to_string()}")
+            logging.info(f"The dataframe Head:  \n{test_df.head().to_string()}")
  
             preprocessor = self.get_data_transformer_object()
 
-            target_column_name = "class"
+            target_column_name = "Good/Bad"
             target_column_mapping = {'+1': 0, '-1': 1}
 
             #training dataframe
